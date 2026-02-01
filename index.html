@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KENN PANEL BOT</title>
+
+<style>
+:root{
+  --bg:#0b0f1a;
+  --card:#11162a;
+  --primary:#4f7cff;
+  --text:#ffffff;
+  --muted:#a0a4b8;
+}
+body.light{
+  --bg:#f4f6fb;
+  --card:#ffffff;
+  --text:#111;
+  --muted:#555;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+
+/* PARTICLE */
+canvas{position:fixed;top:0;left:0;z-index:-1}
+
+/* NAVBAR */
+nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  padding:16px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(12px);
+  z-index:100;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:var(--primary);
+  text-decoration:none;
+}
+.logo img{
+  width:36px;
+  height:36px;
+  object-fit:contain;
+}
+
+.nav-menu{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+.nav-menu a{
+  color:var(--text);
+  text-decoration:none;
+  font-weight:500;
+}
+.nav-menu a:hover{color:var(--primary)}
+
+.toggle{
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:120px 60px;
+}
+.hero h2{
+  font-size:48px;
+  margin-bottom:15px;
+}
+.hero p{
+  color:var(--muted);
+  max-width:600px;
+  font-size:18px;
+}
+
+/* BUTTON */
+.btn{
+  margin-top:25px;
+  padding:14px 30px;
+  border-radius:10px;
+  border:none;
+  background:var(--primary);
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* SECTION */
+section{padding:90px 60px}
+.title{
+  text-align:center;
+  font-size:36px;
+  margin-bottom:45px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.card{
+  background:var(--card);
+  padding:30px;
+  border-radius:16px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s;
+}
+.card.show{
+  opacity:1;
+  transform:translateY(0);
+}
+.price{
+  font-size:32px;
+  color:var(--primary);
+  margin:10px 0;
+}
+
+/* CTA */
+.cta{
+  margin:70px;
+  padding:80px;
+  background:linear-gradient(135deg,var(--primary),#7aa2ff);
+  color:#fff;
+  border-radius:30px;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  padding:35px;
+  color:var(--muted);
+}
+
+@media(max-width:768px){
+  nav{padding:15px 20px}
+  .hero h2{font-size:34px}
+  section{padding:70px 20px}
+  .cta{margin:20px;padding:50px}
+}
+</style>
+</head>
+
+<body>
+<canvas id="particle"></canvas>
+<div id="top"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="#top" class="logo">
+    <img src="https://files.catbox.moe/4m90yk.jpg" alt="KENN PANEL">
+    <span>KENN PANEL</span>
+  </a>
+
+  <div class="nav-menu">
+    <a href="#fitur">Fitur</a>
+    <a href="#harga">Harga</a>
+    <span class="toggle" onclick="toggleMode()">🌙</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <h2>Panel Bot Modern & Profesional</h2>
+    <p>Solusi panel bot WhatsApp & Telegram dengan sistem cepat, aman, dan tampilan elegan.</p>
+    <button class="btn" onclick="daftarWA('CUSTOM','Diskusi')">Daftar Sekarang</button>
+  </div>
+</div>
+
+<!-- FITUR -->
+<section id="fitur">
+  <h2 class="title">Fitur Unggulan</h2>
+  <div class="grid">
+    <div class="card">⚡ Performa Tinggi</div>
+    <div class="card">🔐 Keamanan Sistem</div>
+    <div class="card">🤖 Multi Bot</div>
+    <div class="card">📊 Monitoring Realtime</div>
+  </div>
+</section>
+
+<!-- HARGA -->
+<section id="harga">
+  <h2 class="title">Paket Harga</h2>
+  <div class="grid">
+
+    <div class="card">
+      <h3>PAKET 1</h3>
+      <p class="price">Rp12K</p>
+      <button class="btn" onclick="daftarWA('FREE','Trial')">Daftar</button>
+    </div>
+
+    <div class="card">
+      <h3>PAKET 2</h3>
+      <p class="price">Rp22K</p>
+      <button class="btn" onclick="daftarWA('STANDARD','1 Bulan')">Daftar</button>
+    </div>
+
+    <div class="card">
+      <h3>PAKET 3</h3>
+      <p class="price">Rp32K</p>
+      <button class="btn" onclick="daftarWA('PREMIUM','1 Bulan')">Daftar</button>
+    </div>
+    
+    <div class="card">
+      <h3>PAKET 4</h3>
+      <p class="price">Rp42K</p>
+      <button class="btn" onclick="daftarWA('PREMIUM','1 Bulan')">Daftar</button>
+      </div>
+    
+    <div class="card">
+      <h3>PAKET 5</h3>
+      <p class="price">Rp52K</p>
+      <button class="btn" onclick="daftarWA('PREMIUM','1 Bulan')">Daftar</button>
+      </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <h2>Siap Bangun Bot Kamu?</h2>
+  <button class="btn" onclick="daftarWA('PREMIUM','1 Bulan')">Daftar Sekarang</button>
+</div>
+
+<footer>© 2026 KENN PANEL BOT • All Rights Reserved</footer>
+
+<script>
+// DARK / LIGHT
+function toggleMode(){
+  document.body.classList.toggle('light');
+}
+
+// SCROLL ANIMATION
+const cards=document.querySelectorAll('.card');
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting)x.target.classList.add('show');
+  });
+},{threshold:.2});
+cards.forEach(c=>obs.observe(c));
+
+// WHATSAPP
+function daftarWA(paket,durasi){
+  const nomor="6288987481123"; // GANTI NOMOR WA
+  const pesan=`Halo admin 👋
+Saya ingin daftar KENN PANEL BOT
+
+Paket: ${paket}
+Durasi: ${durasi}`;
+  window.open(`https://wa.me/${nomor}?text=${encodeURIComponent(pesan)}`,"_blank");
+}
+
+// PARTICLE
+const canvas=document.getElementById("particle");
+const ctx=canvas.getContext("2d");
+let w,h,particles=[];
+function resize(){
+  w=canvas.width=innerWidth;
+  h=canvas.height=innerHeight;
+}
+addEventListener("resize",resize);resize();
+
+for(let i=0;i<90;i++){
+  particles.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*2+1,
+    dx:(Math.random()-.5)*.6,
+    dy:(Math.random()-.5)*.6
+  });
+}
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="rgba(79,124,255,.6)";
+  particles.forEach(p=>{
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<0||p.x>w)p.dx*=-1;
+    if(p.y<0||p.y>h)p.dy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
